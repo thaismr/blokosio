@@ -1,0 +1,8 @@
+# Python
+venv/
+
+# Django
+local_settings.py
+db.sqlite3
+
+staticfiles/
