@@ -33,8 +33,13 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    "django.contrib.sites",
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blokosio.users.apps.UsersConfig',
+    'workspace.apps.WorkspaceConfig',
+    'profiles.apps.ProfilesConfig',
+    # 'project.apps.ProjectConfig',
 ]
 
 MIDDLEWARE = [
@@ -74,9 +79,22 @@ WSGI_APPLICATION = 'blokosio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db4.sqlite3',
     }
 }
+
+#: https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# AUTHENTICATION
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/3.2/ref/settings/#authentication-backends
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]
+# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-user-model
+AUTH_USER_MODEL = "users.User"
 
 
 # Password validation
@@ -100,29 +118,27 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
+# https://docs.djangoproject.com/en/3.2/ref/settings/#language-code
+LANGUAGE_CODE = "en-us"
+# https://docs.djangoproject.com/en/3.2/ref/settings/#site-id
+SITE_ID = 1
+# https://docs.djangoproject.com/en/3.2/ref/settings/#use-i18n
 USE_I18N = True
-
+# https://docs.djangoproject.com/en/3.2/ref/settings/#use-l10n
 USE_L10N = True
-
+# https://docs.djangoproject.com/en/3.2/ref/settings/#use-tz
 USE_TZ = True
-
+# https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
+LOCALE_PATHS = [str(BASE_DIR / "locale")]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
-# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 try:
-    from env.local_settings import *
+    from .env.local_settings import *
 except Exception:
     pass
