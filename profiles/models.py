@@ -56,7 +56,13 @@ class MemberProfile(BaseUserProfile):
     #: avoid circular dependency
     Workspace = apps.get_model('workspace', 'Workspace', require_ready=False)
 
-    workspaces = ManyToManyField(Workspace, through='workspace.WorkspaceMembers')
+    #: Workspaces joined
+    #: https://docs.djangoproject.com/en/3.2/ref/models/fields/#django.db.models.ManyToManyField.through_fields
+    workspaces = ManyToManyField(
+        Workspace,
+        blank=True,
+        through='workspace.WorkspaceMembers'
+    )
 
     class Meta:
         #: Custom permissions for member profiles

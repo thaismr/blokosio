@@ -4,8 +4,8 @@ from .models import Workspace, WorkspaceMembers
 
 @admin.register(Workspace)
 class WorkspaceAdmin(admin.ModelAdmin):
-    autocomplete_fields = ('manager',)
-    search_fields = ('manager',)  # Manager available for list search and all around auto-completes
+    autocomplete_fields = ('owner',)
+    search_fields = ('owner',)  # Manager available for list search and all around auto-completes
 
 
 @admin.register(WorkspaceMembers)
