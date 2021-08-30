@@ -45,7 +45,16 @@ class ManagerProfile(BaseUserProfile):
     Project manager profile specific fields.
     https://docs.djangoproject.com/en/3.2/topics/db/models/#multi-table-inheritance
     """
-    pass
+    #: avoid circular dependency
+    # Workspace = apps.get_model('workspace', 'Workspace', require_ready=False)
+
+    #: Workspaces joined
+    #: https://docs.djangoproject.com/en/3.2/ref/models/fields/#django.db.models.ManyToManyField.through_fields
+    # workspaces = ManyToManyField(
+    #     Workspace,
+    #     blank=True,
+    #     through='workspace.WorkspaceManagers',
+    # )
 
 
 class MemberProfile(BaseUserProfile):
@@ -53,16 +62,6 @@ class MemberProfile(BaseUserProfile):
     Team member profile specific fields.
     https://docs.djangoproject.com/en/3.2/topics/db/models/#multi-table-inheritance
     """
-    #: avoid circular dependency
-    Workspace = apps.get_model('workspace', 'Workspace', require_ready=False)
-
-    #: Workspaces joined
-    #: https://docs.djangoproject.com/en/3.2/ref/models/fields/#django.db.models.ManyToManyField.through_fields
-    workspaces = ManyToManyField(
-        Workspace,
-        blank=True,
-        through='workspace.WorkspaceMembers'
-    )
 
     class Meta:
         #: Custom permissions for member profiles

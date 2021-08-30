@@ -12,9 +12,9 @@ class MemberProfileAdmin(admin.ModelAdmin):
     autocomplete_fields = ('user',)
 
     #: Allow autocomplete fields to be used in workspaces admin
-    search_fields = ('workspaces',)
+    search_fields = ('workspaces__name',)
 
-    list_display = ('user', 'bio', 'website', 'birth_date',)
+    list_display = ('user', 'bio', 'website', 'birth_date', 'show_workspaces')
     fieldsets = (
         (None, {
             'fields': (
@@ -24,10 +24,21 @@ class MemberProfileAdmin(admin.ModelAdmin):
                 ('website',),
             )
         }),
-        ('Workspace', {
+        ('Workspaces', {
             # 'classes': ('collapse',),
             'fields': (
-                # ('get_joined_workspaces',),
+                # ('workspaces',),
+                # ('workspace_members',),
             ),
         }),
     )
+
+    def get_queryset(self, request):
+        """
+        Extendido para buscar campos ManyToMany relacionados
+        """
+        return super().get_queryset(request).prefetch_related('workspaces',)
+
+    @admin.display(description='Member Workspaces')
+    def show_workspaces(self, obj):
+        return ", ".join([workspace.name for workspace in obj.workspaces.all()])

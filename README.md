@@ -1,6 +1,29 @@
 # Blokos.io
 
-Minimalistic Django cloud setup
+## App Structure
+
+- Users
+  - Profiles 
+    - Base: Model and functionality common to all users.
+    - Manager:
+      - Generated when registering directly at the main website.
+      - Manages workspaces and all related components.
+    - Members:
+      - Team members for specific projects.
+
+- Workspaces
+  - Each user has a personal workspace as starting point.
+  - Users can create or join* existing projects from their workspaces.
+  - 
+
+## Roadmap
+
+- [x] Profiles 
+- [x] Include Django admin docs
+- [x] User creation to trigger default profile creation.
+- [ ] FIX extra profiles creation for user from admin area
+- [ ] 
+- [ ] Include Django debug toolbar
 
 ## Utils
 

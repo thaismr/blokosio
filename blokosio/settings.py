@@ -36,9 +36,13 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #: Admin auto-generated docs
+    #: https://docs.djangoproject.com/en/3.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs
+    'django.contrib.admindocs',
+    #: Blokos apps
     'blokosio.users.apps.UsersConfig',
-    'workspace.apps.WorkspaceConfig',
     'profiles.apps.ProfilesConfig',
+    'workspace.apps.WorkspaceConfig',
     # 'project.apps.ProjectConfig',
 ]
 
@@ -50,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',  #: Django admin docs
 ]
 
 ROOT_URLCONF = 'blokosio.urls'

@@ -13,4 +13,4 @@ class UserAdmin(BaseUserAdmin):
     list_display = BaseUserAdmin.list_display + ("is_publisher",)
 
     #: Should not be changed directly, but only from registration form / project creation form
-    readonly_fields = ("is_publisher",)
+    # readonly_fields = ("is_publisher",)
